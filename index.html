@@ -1,0 +1,167 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="stile.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <title>Sono vittima?</title>
+</head>
+
+<body onload="inizio()">
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+    mdl-layout--fixed-tabs">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Title</span>
+            </div>
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Inserimento e-mail</a>
+                <a href="#fixed-tab-2" class="mdl-layout__tab">Lista dei siti</a>
+                <a href="#fixed-tab-3" class="mdl-layout__tab">Sondaggio</a>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+        </div>
+
+        <main class="mdl-layout__content">
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+                <div class="page-content">
+                    <p>Benvenut* a questa indagine sui data breach, se parteciperai potrai scoprire se sei stat* vittima
+                        di esfiltrazione di dati personali.</p>
+                    <p>Ti vogliamo assicurare che la tua e-mail non verrà memorizzata da nessuna parte e che i tuoi dati
+                        verranno trattati in modo completamente anonimo</p>
+                    <p> Per favore, inserisci qui il tuo indirizzo e-mail</p>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="email" name="email"><br><br>
+                        <label class="mdl-textfield__label" for="email">Indirizzo e-mail...</label>
+                    </div>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                        onclick="myAPI()">INVIA</button>
+
+                        <div id="vittima">
+                            <h4>Sei stat* vittima di data breach. Clicca <a href="index.html#fixed-tab-2">qui</a> per scoprire quali.</h4>
+                        </div>
+
+                    <div id="ok">
+                        <p>Buone notizie! La tua mail non appare in nessun data breach. Puoi provare con un'altra
+                            mail
+                            oppure
+                            abbandonare il sito! Grazie!</p>
+                    </div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+                <div class="page-content">
+                <div id="container-lista">
+                    <h2>Ouch! Il tuo indirizzo e-mail e' stato trovato in ben <a id="numero_breach">N</a> data
+                        breach!</h3>
+                        <h3>Potresti darmi una mano con il <a href="index.html#fixed-tab-3">sondaggio</a> alla tua destra?
+                    </h2>
+                    <ul class='mdl-list' id="lista">
+                    </ul>
+                </div>
+                </div>
+            </section>
+
+    <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+        <div class="page-content">
+            <div id="google_form">
+                <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdrDUYMIzIWFkzzgf5RnOa3Rwtj06bxZnsN2d57JiM6tT4clQ/viewform?embedded=true"
+                    width="640" height="374" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    </div>
+
+
+    </div>
+
+    </main>
+    </div>
+
+
+    <script type="text/javascript">
+        function myAPI() {
+            email = document.getElementById("email").value;
+
+            console.log('la mail selezionata e' + email)
+
+
+            fetch('http://localhost:3000/hibp?email=' + email)
+                .then(response => response.json())
+                .then(data => printBreach(data))
+                .catch(e => console.log(e));
+
+
+        }
+
+        function printBreach(data) {
+            invisibile("google_form");
+            console.log(data.ok);
+            if (data.ok == "ok") {
+                invisibile("container-lista");
+                visibile("ok")
+            }
+            else {
+                invisibile("ok");
+                visibile("container-lista");
+                visibile("vittima");
+                lista = document.getElementById("lista");
+                emptyList("lista");
+                console.log(data);
+                document.getElementById("numero_breach").innerHTML = data.length;
+                for (i in data) {
+                    breach = data[i];
+                    elemento = document.createElement('li');
+                    elemento.className = "mdl-list__item";
+                    span = document.createElement('span');
+                    span.className = "mdl-list__item-primary-content"
+                    elemento.appendChild(span);
+                    lista.appendChild(elemento);
+                    elemento.innerHTML = elemento.innerHTML + breach.Name;
+                }
+                visibile("google_form");
+            }
+        }
+
+        function toggleDiv(id) {
+            var div = document.getElementById(id);
+            div.style.display = div.style.display == "none" ? "block" : "none";
+        }
+
+        function invisibile(id) {
+            var div = document.getElementById(id);
+            div.style.display = "none";
+
+        }
+        function visibile(id) {
+            var div = document.getElementById(id);
+            div.style.display = "block";
+
+        }
+        function emptyList(id) {
+            root = document.getElementById(id);
+            while (root.firstChild) {
+                root.removeChild(root.firstChild);
+            }
+        }
+
+        function inizio() {
+            invisibile("vittima");
+            invisibile("google_form");
+            invisibile("ok");
+            invisibile("container-lista");
+        }
+    </script>
+    </div>
+</body>
+
+</html>
