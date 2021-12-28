@@ -1,45 +1,39 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+<script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 <!-- Stepper CSS minified -->
-<link rel="stylesheet" href="./stepper.min.css">
+<link rel="stylesheet"  href="./stepper.min.css">
 <!-- Stepper Javascript minified -->
-<script defer src="./stepper.min.js"></script>
-    <link rel="stylesheet" href="stile.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
   
     <title>Sono vittima?</title>
 </head>
 
-<body onload="inizio()">
-
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+<body>
+  <script type="text/javascript" src="./stepper.min.js"></script>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
     mdl-layout--fixed-tabs">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <span class="mdl-layout-title">Title</span>
             </div>
-            <!-- Tabs -->
-            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Inserimento e-mail</a>
-                <a href="#fixed-tab-2" class="mdl-layout__tab">Lista dei siti</a>
-                <a href="#fixed-tab-3" class="mdl-layout__tab">Sondaggio</a>
-            </div>
-        </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Title</span>
-        </div>
-
-        <main class="mdl-layout__content">
-            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-                <div class="page-content">
-                    <p>Benvenut* a questa indagine sui data breach, se parteciperai potrai scoprire se sei stat* vittima
+    </header>
+          
+          
+<ul class="mdl-stepper mdl-stepper--linear mdl-stepper--horizontal" id="demo-stepper-linear">
+  <li class="mdl-step">
+    <span class="mdl-step__label">
+              <span class="mdl-step__title">
+                <span class="mdl-step__title-text">E-mail</span>
+    </span>
+       </span>
+    <div class="mdl-step__content">
+      CIOOOO
+      <p>Benvenut* a questa indagine sui data breach, se parteciperai potrai scoprire se sei stat* vittima
                         di esfiltrazione di dati personali.</p>
                     <p>Ti vogliamo assicurare che la tua e-mail non verrà memorizzata da nessuna parte e che i tuoi dati
                         verranno trattati in modo completamente anonimo</p>
@@ -48,55 +42,125 @@
                         <input class="mdl-textfield__input" type="text" id="email" name="email"><br><br>
                         <label class="mdl-textfield__label" for="email">Indirizzo e-mail...</label>
                     </div>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                        onclick="myAPI()">INVIA</button>
-
-                        <div id="vittima">
-                            <h4>Sei stat* vittima di data breach. Clicca <a href="index.html#fixed-tab-2">qui</a> per scoprire quali.</h4>
-                        </div>
-
-                    <div id="ok">
-                        <p>Buone notizie! La tua mail non appare in nessun data breach. Puoi provare con un'altra
-                            mail
-                            oppure
-                            abbandonare il sito! Grazie!</p>
-                    </div>
-                </div>
-            </section>
-            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-                <div class="page-content">
-                <div id="container-lista">
-                    <h2>Ouch! Il tuo indirizzo e-mail e' stato trovato in ben <a id="numero_breach">N</a> data
-                        breach!</h3>
-                        <h3>Potresti darmi una mano con il <a href="index.html#fixed-tab-3">sondaggio</a> alla tua destra?
-                    </h2>
-                    <ul class='mdl-list' id="lista">
-                    </ul>
-                </div>
-                </div>
-            </section>
-
-    <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-        <div class="page-content">
-            <div id="google_form">
-                <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSdrDUYMIzIWFkzzgf5RnOa3Rwtj06bxZnsN2d57JiM6tT4clQ/viewform?embedded=true"
-                    width="640" height="374" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
-            </div>
-        </div>
-    </section>
-    </main>
-
     </div>
-
-
+    <div class="mdl-step__actions">
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" onclick="myAPI()" data-stepper-next>
+            Continua
+          </button>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" data-stepper-cancel>
+            Cancel
+          </button>
     </div>
-
-    </main>
+  </li>
+  
+  <li class="mdl-step">
+    <span class="mdl-step__label">
+          <span class="mdl-step__title">
+            <span class="mdl-step__title-text">Risultato</span>
+    </span>
+    </span>
+    <div class="mdl-step__content">
+      <div id="risultato"></div>
+      <div id="lista"></div>
     </div>
+    <div class="mdl-step__actions">
+      <button id="bottone2" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next>
+            Continue
+          </button>
+      <button id="cancella2" onclick="location.reload()" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-stepper-cancel>
+            Indietro
+          </button>
+    </div>
+  </li>
+  
+  <li class="mdl-step">
+    <span class="mdl-step__label">
+          <span class="mdl-step__title">
+            <span class="mdl-step__title-text">Sondaggio</span>
+    </span>
+    </span>
+    <div class="mdl-step__content">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ/viewform?embedded=true" 
+      width="640" height="675" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
+    </div>
+    <div class="mdl-step__actions">
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next>
+            Continue
+          </button>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" data-stepper-cancel>
+            Cancel
+          </button>
+    </div>
+  </li>
+</ul>
+  
+  
+  
+  <script>
+    componentHandler.upgradeAllRegistered();
+  (function () {
+    var selector = '.mdl-stepper#demo-stepper-linear';
+    // Select stepper container element      
+    var stepperElement = document.querySelector(selector);
+    var Stepper;
+    var steps;
+    
+    if (!stepperElement) return;
+    
+    // Get the MaterialStepper instance of element to control it.          
+    Stepper = stepperElement.MaterialStepper;
+    
+    if (!Stepper) {
+      console.error('MaterialStepper instance is not available for selector: ' + selector + '.');
+      return;
+    }
+    steps = stepperElement.querySelectorAll('.mdl-step');
 
+    for (var i = 0; i < steps.length; i++) {
+      // When user clicks on [data-stepper-next] button of step.          
+      steps[i].addEventListener('onstepnext', function (e) {
+        // {element}.MaterialStepper.next() change the state of current step to "completed" 
+        // and move one step forward.        
+        Stepper.next();              
+      });
+    }
 
-    <script type="text/javascript">
+    // When all steps are completed this event is dispatched.          
+    stepperElement.addEventListener('onsteppercomplete', function (e) {
+      var toast = document.querySelector('#snackbar-stepper-complete');
+
+      if (!toast) return;
+
+      toast.MaterialSnackbar.showSnackbar({
+        message: 'Stepper linear are completed',
+        timeout: 4000,
+        actionText: 'Ok'
+      });
+    });
+  })();
+
+  /*(function () {
+    var toggle = document.querySelector('[href="#stepper-linear-toggle"]');
+    var snippetDirections = document.querySelector('#snippet-stepper-linear');
+    var stepperElement = snippetDirections.querySelector('.mdl-stepper');
+    var cssClassHorizontal = 'mdl-stepper--horizontal';
+
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      
+      if (!stepperElement) return;
+
+      if (stepperElement.classList.contains(cssClassHorizontal)) {
+        stepperElement.classList.remove(cssClassHorizontal);
+      } else {
+        stepperElement.classList.add(cssClassHorizontal);        
+      }
+    });
+  })();*/
+
+</script>
+  
+<script type="text/javascript">
         function myAPI() {
             email = document.getElementById("email").value;
 
@@ -112,20 +176,31 @@
         }
 
         function printBreach(data) {
-            invisibile("google_form");
             console.log(data.ok);
             if (data.ok == "ok") {
-                invisibile("container-lista");
-                visibile("ok")
+                divRisultato = document.getElementById("risultato");
+                h3Risultato = document.createElement('h3');
+                pRisultato = document.createElement('p');
+                pRisultato.innerHTML = "Il tuo indirizzo e-mail non risulta in nessuno dei data breach a nostra conoscenza. Puoi provare con un"+
+                " altro indirizzo o abbandonare il sito. Grazie!";
+                h3Risultato.innerHTML= "Buone notizie!";
+                divRisultato.appendChild(h3Risultato);
+                divRisultato.appendChild(pRisultato);
+                console.log("APPESO");
+                bottone2 = document.getElementById("bottone2");
+                bottone2.style.display = "none";
             }
             else {
-                invisibile("ok");
-                visibile("container-lista");
-                visibile("vittima");
+                divRisultato = document.getElementById("risultato");
+                h3Risultato = document.createElement('h3');
+                pRisultato = document.createElement('p');
+                pRisultato.innerHTML = "Il tuo indirizzo e-mail è stato trovato in " + data.length + " data breach. Di seguito la lista.";
+                h3Risultato.innerHTML= "Pessime notizie!";
+                divRisultato.appendChild(h3Risultato);
+                divRisultato.appendChild(pRisultato);
                 lista = document.getElementById("lista");
                 emptyList("lista");
                 console.log(data);
-                document.getElementById("numero_breach").innerHTML = data.length;
                 for (i in data) {
                     breach = data[i];
                     elemento = document.createElement('li');
@@ -136,7 +211,6 @@
                     lista.appendChild(elemento);
                     elemento.innerHTML = elemento.innerHTML + breach.Name;
                 }
-                visibile("google_form");
             }
         }
 
