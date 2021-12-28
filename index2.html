@@ -3,7 +3,7 @@
 <head>
  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+<script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 <!-- Stepper CSS minified -->
 <link rel="stylesheet"  href="./stepper.min.css">
 <!-- Stepper Javascript minified -->
@@ -28,7 +28,7 @@
   <li class="mdl-step">
     <span class="mdl-step__label">
               <span class="mdl-step__title">
-                <span class="mdl-step__title-text">Inserimento e-mail</span>
+                <span class="mdl-step__title-text">E-mail</span>
     </span>
        </span>
     <div class="mdl-step__content">
@@ -56,25 +56,19 @@
   <li class="mdl-step">
     <span class="mdl-step__label">
           <span class="mdl-step__title">
-            <span class="mdl-step__title-text">Title longer than it should be</span>
+            <span class="mdl-step__title-text">Risultato</span>
     </span>
     </span>
     <div class="mdl-step__content">
-    <div id="container-lista">
-                    <h2>Ouch! Il tuo indirizzo e-mail e' stato trovato in ben <a id="numero_breach">N</a> data
-                        breach!</h3>
-                        <h3>Potresti darmi una mano con il <a href="index.html#fixed-tab-3">sondaggio</a> alla tua destra?
-                    </h2>
-                    <ul class='mdl-list' id="lista">
-                    </ul>
-                </div>
+      <div id="risultato"></div>
+      <div id="lista"></div>
     </div>
     <div class="mdl-step__actions">
-      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next>
+      <button id="bottone2" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next>
             Continue
           </button>
-      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" data-stepper-cancel>
-            Cancel
+      <button id="cancella2" onclick="location.reload()" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-stepper-cancel>
+            Indietro
           </button>
     </div>
   </li>
@@ -82,10 +76,13 @@
   <li class="mdl-step">
     <span class="mdl-step__label">
           <span class="mdl-step__title">
-            <span class="mdl-step__title-text">Title of step 3</span>
+            <span class="mdl-step__title-text">Sondaggio</span>
     </span>
     </span>
-    <div class="mdl-step__content"></div>
+    <div class="mdl-step__content">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ/viewform?embedded=true" 
+      width="640" height="675" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
+    </div>
     <div class="mdl-step__actions">
       <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next>
             Continue
@@ -100,6 +97,7 @@
   
   
   <script>
+    componentHandler.upgradeAllRegistered();
   (function () {
     var selector = '.mdl-stepper#demo-stepper-linear';
     // Select stepper container element      
@@ -141,7 +139,7 @@
     });
   })();
 
-  (function () {
+  /*(function () {
     var toggle = document.querySelector('[href="#stepper-linear-toggle"]');
     var snippetDirections = document.querySelector('#snippet-stepper-linear');
     var stepperElement = snippetDirections.querySelector('.mdl-stepper');
@@ -158,7 +156,7 @@
         stepperElement.classList.add(cssClassHorizontal);        
       }
     });
-  })();
+  })();*/
 
 </script>
   
@@ -178,20 +176,31 @@
         }
 
         function printBreach(data) {
-            invisibile("google_form");
             console.log(data.ok);
             if (data.ok == "ok") {
-                invisibile("container-lista");
-                visibile("ok")
+                divRisultato = document.getElementById("risultato");
+                h3Risultato = document.createElement('h3');
+                pRisultato = document.createElement('p');
+                pRisultato.innerHTML = "Il tuo indirizzo e-mail non risulta in nessuno dei data breach a nostra conoscenza. Puoi provare con un"+
+                " altro indirizzo o abbandonare il sito. Grazie!";
+                h3Risultato.innerHTML= "Buone notizie!";
+                divRisultato.appendChild(h3Risultato);
+                divRisultato.appendChild(pRisultato);
+                console.log("APPESO");
+                bottone2 = document.getElementById("bottone2");
+                bottone2.style.display = "none";
             }
             else {
-                invisibile("ok");
-                visibile("container-lista");
-                visibile("vittima");
+                divRisultato = document.getElementById("risultato");
+                h3Risultato = document.createElement('h3');
+                pRisultato = document.createElement('p');
+                pRisultato.innerHTML = "Il tuo indirizzo e-mail è stato trovato in " + data.length + " data breach. Di seguito la lista.";
+                h3Risultato.innerHTML= "Pessime notizie!";
+                divRisultato.appendChild(h3Risultato);
+                divRisultato.appendChild(pRisultato);
                 lista = document.getElementById("lista");
                 emptyList("lista");
                 console.log(data);
-                document.getElementById("numero_breach").innerHTML = data.length;
                 for (i in data) {
                     breach = data[i];
                     elemento = document.createElement('li');
@@ -202,7 +211,6 @@
                     lista.appendChild(elemento);
                     elemento.innerHTML = elemento.innerHTML + breach.Name;
                 }
-                visibile("google_form");
             }
         }
 
