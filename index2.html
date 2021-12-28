@@ -25,6 +25,7 @@
                 <!-- Title -->
                 <span class="mdl-layout-title">Title</span>
             </div>
+    </header>
           
           
 <ul class="mdl-stepper mdl-stepper--linear mdl-stepper--horizontal" id="demo-stepper-linear">
@@ -33,9 +34,126 @@
               <span class="mdl-step__title">
                 <span class="mdl-step__title-text">Inserimento e-mail</span>
     </span>
+       </span>
+    <div class="mdl-step__content">
+      <p>Benvenut* a questa indagine sui data breach, se parteciperai potrai scoprire se sei stat* vittima
+                        di esfiltrazione di dati personali.</p>
+                    <p>Ti vogliamo assicurare che la tua e-mail non verrà memorizzata da nessuna parte e che i tuoi dati
+                        verranno trattati in modo completamente anonimo</p>
+                    <p> Per favore, inserisci qui il tuo indirizzo e-mail</p>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="email" name="email"><br><br>
+                        <label class="mdl-textfield__label" for="email">Indirizzo e-mail...</label>
+                    </div>
+    </div>
+    <div class="mdl-step__actions">
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" onclick="myAPI()" data-stepper-next>
+            Continua
+          </button>
+      
+      <div id="vittima">
+                            <h4>Sei stat* vittima di data breach. Clicca <a href="index.html#fixed-tab-2">qui</a> per scoprire quali.</h4>
+                        </div>
+
+                    <div id="ok">
+                        <p>Buone notizie! La tua mail non appare in nessun data breach. Puoi provare con un'altra
+                            mail
+                            oppure
+                            abbandonare il sito! Grazie!</p>
+                    </div>
+    </div>
+  </li>
+  
+  <li class="mdl-step">
+    <span class="mdl-step__label">
+          <span class="mdl-step__title">
+            <span class="mdl-step__title-text">Title longer than it should be</span>
+    </span>
+    </span>
+    <div class="mdl-step__content">
+    <div id="container-lista">
+                    <h2>Ouch! Il tuo indirizzo e-mail e' stato trovato in ben <a id="numero_breach">N</a> data
+                        breach!</h3>
+                        <h3>Potresti darmi una mano con il <a href="index.html#fixed-tab-3">sondaggio</a> alla tua destra?
+                    </h2>
+                    <ul class='mdl-list' id="lista">
+                    </ul>
+                </div>
+    </div>
+    <div class="mdl-step__actions">
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next>
+            Continue
+          </button>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" data-stepper-cancel>
+            Cancel
+          </button>
+    </div>
+  </li>
   
   
   
+  <script>
+  (function () {
+    var selector = '.mdl-stepper#demo-stepper-linear';
+    // Select stepper container element      
+    var stepperElement = document.querySelector(selector);
+    var Stepper;
+    var steps;
+    
+    if (!stepperElement) return;
+    
+    // Get the MaterialStepper instance of element to control it.          
+    Stepper = stepperElement.MaterialStepper;
+    
+    if (!Stepper) {
+      console.error('MaterialStepper instance is not available for selector: ' + selector + '.');
+      return;
+    }
+    steps = stepperElement.querySelectorAll('.mdl-step');
+
+    for (var i = 0; i < steps.length; i++) {
+      // When user clicks on [data-stepper-next] button of step.          
+      steps[i].addEventListener('onstepnext', function (e) {
+        // {element}.MaterialStepper.next() change the state of current step to "completed" 
+        // and move one step forward.        
+        Stepper.next();              
+      });
+    }
+
+    // When all steps are completed this event is dispatched.          
+    stepperElement.addEventListener('onsteppercomplete', function (e) {
+      var toast = document.querySelector('#snackbar-stepper-complete');
+
+      if (!toast) return;
+
+      toast.MaterialSnackbar.showSnackbar({
+        message: 'Stepper linear are completed',
+        timeout: 4000,
+        actionText: 'Ok'
+      });
+    });
+  })();
+
+  (function () {
+    var toggle = document.querySelector('[href="#stepper-linear-toggle"]');
+    var snippetDirections = document.querySelector('#snippet-stepper-linear');
+    var stepperElement = snippetDirections.querySelector('.mdl-stepper');
+    var cssClassHorizontal = 'mdl-stepper--horizontal';
+
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      
+      if (!stepperElement) return;
+
+      if (stepperElement.classList.contains(cssClassHorizontal)) {
+        stepperElement.classList.remove(cssClassHorizontal);
+      } else {
+        stepperElement.classList.add(cssClassHorizontal);        
+      }
+    });
+  })();
+
+</script>
   
 <script type="text/javascript">
         function myAPI() {
