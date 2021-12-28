@@ -5,7 +5,7 @@ var app = express().use(express.static(__dirname + '/'));
 var http = require('http').Server(app);
 
 app.get("/", function(request, response) {
-  response.sendFile(__dirname + "index.html");
+  response.sendFile(__dirname + "index2.html");
 });
 
 app.get('/hibp', (req, res) => {

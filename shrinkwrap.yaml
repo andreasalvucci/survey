@@ -6,6 +6,7 @@ dependencies:
   fastify-formbody: 5.2.0
   fastify-static: 4.5.0
   handlebars: 4.7.7
+  materialize-stepper: 3.1.0
   needle: 3.0.0
   point-of-view: 4.16.0
   request: 2.88.2
@@ -647,6 +648,10 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
+  /materialize-stepper/3.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-AtN2zzTEpsDTAVIU5eF0lC1ixaeCPZUyKmcx0jDwFqCGloY63uKR3t3HPvDRGZbt35bg6S22bUpHFv1hFDcjow==
   /media-typer/0.3.0:
     dev: false
     engines:
@@ -1203,6 +1208,7 @@ specifiers:
   fastify-formbody: ^5.2.0
   fastify-static: ^4.5.0
   handlebars: ^4.7.7
+  materialize-stepper: ^3.1.0
   needle: ^3.0.0
   point-of-view: ^4.16.0
   request: ^2.88.2
