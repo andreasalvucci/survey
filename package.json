@@ -4,14 +4,20 @@
   "description": "A simple Node app built on fastify, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node api.js server.js"
   },
   "dependencies": {
     "fastify": "^3.25.0",
     "fastify-formbody": "^5.2.0",
     "fastify-static": "^4.5.0",
     "handlebars": "^4.7.7",
-    "point-of-view": "^4.16.0"
+    "point-of-view": "^4.16.0",
+    "string-sanitizer": "^2.0.2",
+    "express": "^4.7.2",
+    "cors": "^2.8.5",
+    "needle": "^3.0.0",
+    "body-parser": "^1.19.1",
+    "request": "^2.88.2"
   },
   "engines": {
     "node": "12.x"
