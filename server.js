@@ -7,6 +7,12 @@ var http = require('http').Server(app);
 app.get("/", function(request, response) {
   response.sendFile(__dirname + "index2.html");
 });
+app.use(express.static(__dirname + "/public", {
+    index: false, 
+    immutable: true, 
+    cacheControl: true,
+    maxAge: "30d"
+}));
 
 app.get('/hibp', (req, res) => {
   var sanitizer = require('string-sanitizer')
