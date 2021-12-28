@@ -7,6 +7,7 @@ dependencies:
   fastify-static: 4.5.0
   handlebars: 4.7.7
   materialize-stepper: 3.1.0
+  mdl-stepper: 1.1.6
   needle: 3.0.0
   point-of-view: 4.16.0
   request: 2.88.2
@@ -652,6 +653,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-AtN2zzTEpsDTAVIU5eF0lC1ixaeCPZUyKmcx0jDwFqCGloY63uKR3t3HPvDRGZbt35bg6S22bUpHFv1hFDcjow==
+  /mdl-stepper/1.1.6:
+    dev: false
+    resolution:
+      integrity: sha1-Cwu63DZ3sNCvoFox6Uc0bndpFjE=
   /media-typer/0.3.0:
     dev: false
     engines:
@@ -1209,6 +1214,7 @@ specifiers:
   fastify-static: ^4.5.0
   handlebars: ^4.7.7
   materialize-stepper: ^3.1.0
+  mdl-stepper: ^1.1.6
   needle: ^3.0.0
   point-of-view: ^4.16.0
   request: ^2.88.2
