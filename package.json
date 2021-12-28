@@ -1,37 +1,42 @@
 {
-  "name": "hello-node",
-  "version": "0.0.1",
-  "description": "A simple Node app built on fastify, instantly up and running.",
-  "main": "server.js",
+  "name": "mdl-stepper",
+  "version": "1.1.6",
+  "description": "A library that implements to the Material Design Lite a polyfill of stepper component specified by Material Design.",
+  "main": "stepper.min.js",
+  "directories": {
+    "doc": "docs"
+  },
   "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "fastify": "^3.25.0",
-    "fastify-formbody": "^5.2.0",
-    "fastify-static": "^4.5.0",
-    "handlebars": "^4.7.7",
-    "point-of-view": "^4.16.0",
-    "string-sanitizer": "^2.0.2",
-    "express": "^4.7.2",
-    "cors": "^2.8.5",
-    "needle": "^3.0.0",
-    "body-parser": "^1.19.1",
-    "request": "^2.88.2",
-    "materialize-stepper": "^3.1.0",
-    "mdl-stepper": "^1.1.6",
-    "material-design-lite": "^1.3.0"
-  },
-  "engines": {
-    "node": "12.x"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack",
+    "dev-server": "webpack-dev-server --host 127.0.0.1 --port 3000 --inline --hot",
+    "prod": "export NODE_ENV=production && webpack",
+    "prod-windows": "set \"NODE_ENV=production\" && \"./node_modules/.bin/webpack\""
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+    "type": "git",
+    "url": "https://github.com/ahlechandre/mdl-stepper.git"
   },
-  "license": "MIT",
   "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+    "Material Design Lite",
+    "MDL-Stepper",
+    "Material Design Stepper",
+    "Stepper Component"
+  ],
+  "author": "Alexandre Thebaldi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ahlechandre/mdl-stepper/issues"
+  },
+  "homepage": "https://ahlechandre.github.io/mdl-stepper",
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "eslint": "^2.12.0",
+    "eslint-config-google": "^0.6.0",
+    "material-design-lite": "^1.1.3",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
 }
