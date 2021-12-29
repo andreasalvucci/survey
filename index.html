@@ -12,6 +12,10 @@
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
     <style>
+        blockquote {
+            border-left: 5px solid #2196f3;
+        }
+        
         .btn,
         .btn-large,
         .btn-small,
@@ -39,55 +43,86 @@
     <div class="section grey lighten-5">
         <div class="container">
             <div class="row">
-                <div id="mainContainer" class="col xl4 l6 m10 s12 offset-xl4 offset-l3 offset-m1"></div>
 
-                <h3 class="light center-align blue-text">Sign up form</h3>
+
+                <h3 class="light center-align blue-text">Dove sono i miei dati?</h3>
                 <div class="card">
                     <div class="card-content">
 
 
                         <ul class="stepper horizontal linear">
+
                             <li class="step active">
-                                <span class="mdl-step__label">
-              <span class="mdl-step__title">
-                <span class="mdl-step__title-text">E-mail</span>
-                                </span>
-                                </span>
+                                <div class="step-title waves-effect waves-dark">Introduzione</div>
                                 <div class="step-content">
                                     <div class="row">
+                                        <blockquote>
+                                            Benvenut*! Sto conducendo un'indagine sulle reazioni delle persone quando vengono a conoscenza di essere state <b>vittime di data breach</b>. Un data breach è una violazione di sicurezza che comporta - accidentalmente
+                                            o in modo illecito - la distruzione, la perdita, la modifica, la divulgazione non autorizzata o l’accesso ai dati personali trasmessi, conservati o comunque trattati.
+                                        </blockquote>
+                                        <blockquote>
+                                            Nei prossimi passaggi potrai scoprire se sei mai stat* vittima di un data breach e potrai sapere quali e quanti. Alla fine ti chiederò di compilare un piccolo questionario che mi sarà molto utile.
+                                        </blockquote>
+                                        <blockquote>
+                                            D'accordo? Fai tap o clicca su Avanti!
+                                        </blockquote>
+
+                                        <blockquote>
+                                            Ci tengo a ricordarti che <b>in nessun modo</b> alcuno dei tuoi dati che fornirai verrà salvato. Il sondaggio finale è <b>anonimo</b>.
+                                        </blockquote>
+                                    </div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn blue next-step" data-feedback="anyThing">Avanti</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step">
+                                <div class="step-title waves-effect waves-dark">La tua e-mail</div>
+                                <div class="step-content">
+                                    <div class="row">
+                                        <blockquote>Inserisci qui il tuo indirizzo e-mail che usi più di frequente (ad esempio per registrarti ad un sito). Ancora una volta ti ricordiamo che <b>non verrà conservato</b> da nessuna parte, nel rispetto della tua privacy.
+                                        </blockquote>
                                         <div class="input-field col s12">
                                             <input id="email" name="email" type="email" class="validate" required>
                                             <label for="email">La tua e-mail</label>
                                         </div>
                                     </div>
                                     <div class="step-actions">
-                                        <button class="waves-effect waves-dark btn blue next-step" onclick="myAPI()" data-feedback="anyThing">Continue</button>
+                                        <button class="waves-effect waves-dark btn blue next-step" onclick="myAPI()" data-feedback="anyThing">Avanti</button>
+                                        <button class="waves-effect waves-dark btn-flat previous-step">Indietro</button>
                                     </div>
                                 </div>
                             </li>
 
                             <li class="step">
                                 <div class="step-title waves-effect waves-dark">Risultato</div>
+
                                 <div class="step-content">
+
                                     <div class="row">
+
                                         <div id="risultato"></div>
                                         <div id="divLista"></div>
+                                    </div>
+
+                                    <div class="step-actions" style="position: static">
+                                        <button id="continuaAlSondaggio" class="waves-effect waves-dark btn blue next-step">Avanti</button>
+                                        <button class="waves-effect waves-dark btn-flat previous-step">Indietro</button>
 
                                     </div>
 
-                                    <button id="continuaAlSondaggio" class="waves-effect waves-dark btn blue next-step">Continua</button>
-                                    <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
                                 </div>
                             </li>
 
                             <li class="step">
                                 <div class="step-title waves-effect waves-dark">Sondaggio</div>
                                 <div class="step-content">
-                                    <p>Ti chiediamo per favore di compilare questo sondaggio.</p>
+                                    <blockquote>Ti chiediamo per favore di compilare questo sondaggio. Se vuoi, puoi compilarlo anche a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ">questo link</a>. Grazie!</blockquote>
                                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ/viewform?embedded=true" width=100% height="675" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
                                 </div>
                                 <div class="step-actions">
-                                    <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+                                    <button class="waves-effect waves-dark btn-flat previous-step">Indietro</button>
                                 </div>
                             </li>
                         </ul>
@@ -153,23 +188,23 @@
             console.log(data.ok);
             if (data.ok == "ok") {
                 divRisultato = document.getElementById("risultato");
-                h3Risultato = document.createElement('h3');
-                pRisultato = document.createElement('p');
-                pRisultato.innerHTML = "Il tuo indirizzo e-mail non risulta in nessuno dei data breach a nostra conoscenza. Puoi provare con un" +
+                h2Risultato = document.createElement('h2');
+                blockquoteRisultato = document.createElement('blockquote');
+                blockquoteRisultato.innerHTML = "Il tuo indirizzo e-mail non risulta in nessuno dei data breach a nostra conoscenza. Puoi provare con un" +
                     " altro indirizzo o abbandonare il sito. Grazie!";
-                h3Risultato.innerHTML = "Buone notizie!";
-                divRisultato.appendChild(h3Risultato);
-                divRisultato.appendChild(pRisultato);
+                h2Risultato.innerHTML = "Buone notizie!";
+                divRisultato.appendChild(h2Risultato);
+                divRisultato.appendChild(blockquoteRisultato);
                 bottoneAlSondaggio = document.getElementById("continuaAlSondaggio");
                 bottoneAlSondaggio.disabled = "true";
             } else {
                 divRisultato = document.getElementById("risultato");
-                h3Risultato = document.createElement('h3');
-                pRisultato = document.createElement('p');
-                pRisultato.innerHTML = "Il tuo indirizzo e-mail è stato trovato in " + data.length + " data breach. Di seguito la lista.";
-                h3Risultato.innerHTML = "Pessime notizie!";
-                divRisultato.appendChild(h3Risultato);
-                divRisultato.appendChild(pRisultato);
+                h2Risultato = document.createElement('h2');
+                blockquoteRisultato = document.createElement('blockquote');
+                blockquoteRisultato.innerHTML = "Il tuo indirizzo e-mail è stato trovato in " + data.length + " data breach. Di seguito la lista.";
+                h2Risultato.innerHTML = "Pessime notizie!";
+                divRisultato.appendChild(h2Risultato);
+                divRisultato.appendChild(blockquoteRisultato);
                 divLista = document.getElementById("divLista");
                 lista = document.createElement('ul');
                 lista.className = "collection";
