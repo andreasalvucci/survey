@@ -3,7 +3,9 @@
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/materialize-stepper@3.1.0/dist/css/mstepper.min.css">
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script src="https://unpkg.com/materialize-stepper@3.1.0/dist/js/mstepper.min.js"></script>
     <!-- Stepper CSS minified -->
     <link rel="stylesheet" href="./stepper.min.css">
     <!-- Stepper Javascript minified -->
@@ -84,7 +86,7 @@
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ/viewform?embedded=true" width="640" height="675" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
                 </div>
                 <div class="mdl-step__actions">
-                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next>
+                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored mdl-button--raised" data-stepper-next disabled>
             Continue
           </button>
                     <button class="mdl-button mdl-js-button mdl-js-ripple-effect" data-stepper-cancel>
@@ -101,6 +103,15 @@
 
         <script>
             componentHandler.upgradeAllRegistered();
+
+            function stepback() {
+                var selector = '.mdl-stepper#demo-stepper-nonlinear';
+                // Select stepper container element      
+                var stepperElement = document.querySelector(selector);
+                var Stepper;
+                Stepper = stepperElement.MaterialStepper;
+                Stepper.next();
+            }
             (function() {
                 var selector = '.mdl-stepper#demo-stepper-nonlinear';
                 // Select stepper container element      
@@ -184,7 +195,6 @@
                     divRisultato.appendChild(h3Risultato);
                     divRisultato.appendChild(pRisultato);
                     lista = document.getElementById("lista");
-                    emptyList("lista");
                     console.log(data);
                     for (i in data) {
                         breach = data[i];
@@ -197,37 +207,6 @@
                         elemento.innerHTML = elemento.innerHTML + breach.Name;
                     }
                 }
-            }
-
-            function toggleDiv(id) {
-                var div = document.getElementById(id);
-                div.style.display = div.style.display == "none" ? "block" : "none";
-            }
-
-            function invisibile(id) {
-                var div = document.getElementById(id);
-                div.style.display = "none";
-
-            }
-
-            function visibile(id) {
-                var div = document.getElementById(id);
-                div.style.display = "block";
-
-            }
-
-            function emptyList(id) {
-                root = document.getElementById(id);
-                while (root.firstChild) {
-                    root.removeChild(root.firstChild);
-                }
-            }
-
-            function inizio() {
-                invisibile("vittima");
-                invisibile("google_form");
-                invisibile("ok");
-                invisibile("container-lista");
             }
         </script>
     </div>
