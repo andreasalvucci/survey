@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
 
 <head>
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/survey-jquery@1.9.5/survey.jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
@@ -10,6 +12,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
     <style>
         blockquote {
@@ -106,7 +109,7 @@
                                     </div>
 
                                     <div class="step-actions" style="position: static">
-                                        <button id="continuaAlSondaggio" class="waves-effect waves-dark btn blue next-step">Avanti</button>
+                                        <button id="continuaAlSondaggio" class="waves-effect waves-dark btn blue next-step" onclick="creaSondaggio()">Avanti</button>
                                         <button class="waves-effect waves-dark btn-flat previous-step">Indietro</button>
 
                                     </div>
@@ -118,8 +121,13 @@
                             <li class="step">
                                 <div class="step-title waves-effect waves-dark">Sondaggio</div>
                                 <div class="step-content">
-                                    <blockquote>Ti chiediamo per favore di compilare questo sondaggio. Se vuoi, puoi compilarlo anche a <a href="https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ">questo link</a>. Grazie!</blockquote>
-                                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ/viewform?embedded=true" width=100% height="675" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>
+                                    <blockquote>Ti chiediamo per favore di compilare questo sondaggio. Se la visualizzazione ti risulta scomoda, puoi compilarlo anche in un' altra scheda a <a href="javascript:openInNewTab(https://docs.google.com/forms/d/e/1FAIpQLSdpKfmASI77RfLYmZoDBOXBVYXWsIDFGVQyP0W84Ix0vNmaNQ)">questo link</a>.
+                                        Grazie!
+                                    </blockquote>
+                                    <div>
+                                        <div id="surveyContainer"></div>
+                                    </div>
+
                                 </div>
                                 <div class="step-actions">
                                     <button class="waves-effect waves-dark btn-flat previous-step">Indietro</button>
@@ -159,11 +167,13 @@
         function myAPI() {
             pulisciStep2();
             email = document.getElementById("email").value;
+            url_encoded_email = encodeURIComponent(email)
 
-            console.log('la mail selezionata e' + email)
+            console.log('la mail selezionata e ' + email)
+            console.log('la mail url encoded e ' + url_encoded_email)
 
 
-            fetch('./hibp?email=' + email)
+            fetch('./hibp?email=' + url_encoded_email)
                 .then(response => response.json())
                 .then(data => printBreach(data))
                 .catch(e => console.log(e));
@@ -180,6 +190,10 @@
 
             bottoneAlSondaggio = document.getElementById("continuaAlSondaggio");
             bottoneAlSondaggio.disabled = false;
+        }
+
+        function openInNewTab(url) {
+            window.open(url, '_blank').focus();
         }
 
 
@@ -218,9 +232,198 @@
                     elemento.innerHTML = elemento.innerHTML + breach.Name;
                 }
             }
+            urlemail = "/hibp?email=" + email
+        }
+
+
+
+
+
+        function creaSondaggio() {
+            var surveyJSON = {
+                pages: [{
+                    name: "anagrafica",
+                    elements: [{
+                        type: "radiogroup",
+                        name: "sesso",
+                        title: "Sesso",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "M"
+                        }, {
+                            value: "item2",
+                            text: "F"
+                        }, {
+                            value: "item3",
+                            text: "Non-binary"
+                        }],
+                        hasOther: true,
+                        hasNone: true,
+                        noneText: "Altro",
+                        otherText: "Preferisco non specificare"
+                    }, {
+                        type: "radiogroup",
+                        name: "eta",
+                        title: "Età",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "<18"
+                        }, {
+                            value: "item2",
+                            text: "18-24"
+                        }, {
+                            value: "item3",
+                            text: "24-30"
+                        }],
+                        hasOther: true,
+                        hasNone: true,
+                        noneText: ">50",
+                        otherText: "35-50"
+                    }, {
+                        type: "radiogroup",
+                        name: "question1",
+                        title: "Occupazione",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Sto terminando la scuola superiore"
+                        }, {
+                            value: "item2",
+                            text: "Sto completando la laurea triennale"
+                        }, {
+                            value: "item3",
+                            text: "Sto completando la laurea magistrale"
+                        }, {
+                            value: "item4",
+                            text: "Attualmente sono senza occupazione"
+                        }],
+                        hasOther: true,
+                        hasNone: true,
+                        noneText: "Lavoro",
+                        otherText: "Sto completando il dottorato/assegno di ricerca"
+                    }, {
+                        type: "rating",
+                        name: "dimestichezza_informatica",
+                        title: "Quanta dimestichezza hai con il computer e in generale con l'informatica?",
+                        isRequired: true
+                    }, {
+                        type: "checkbox",
+                        name: "question3",
+                        title: "Per cosa utilizzi l'indirizzo di posta elettronica che hai inserito prima?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Posta elettronica personale"
+                        }, {
+                            value: "item2",
+                            text: "Posta elettronica istituzionale (università)"
+                        }, {
+                            value: "item3",
+                            text: "Posta elettronica professionale (lavoro)"
+                        }],
+                        hasOther: true,
+                        otherText: "Altro (descrivi)"
+                    }, {
+                        type: "radiogroup",
+                        name: "question2",
+                        title: "Da quanto tempo usi quell'indirizzo e-mail?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Meno di un anno"
+                        }, {
+                            value: "item2",
+                            text: "Meno di cinque anni"
+                        }, {
+                            value: "item3",
+                            text: "Più di cinque anni"
+                        }]
+                    }, {
+                        type: "radiogroup",
+                        name: "question4",
+                        title: "Condividi con qualcuno quell'indirizzo e-mail?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Sì"
+                        }, {
+                            value: "item2",
+                            text: "No"
+                        }]
+                    }, {
+                        type: "radiogroup",
+                        name: "question5",
+                        title: "Quanti altri indirizzi e-mail possiedi?",
+                        choices: [{
+                            value: "item1",
+                            text: "Nessun altro"
+                        }, {
+                            value: "item2",
+                            text: "Almeno un altro"
+                        }, {
+                            value: "item3",
+                            text: "Più di due"
+                        }]
+                    }],
+                    title: "Sondaggio"
+                }, {
+                    name: "page1",
+                    elements: [{
+                        type: "text",
+                        name: "question6",
+                        title: "Di quanti data breach sei stat* vittima?",
+                        description: "Puoi tornare indietro per ri-controllare",
+                        inputType: "number",
+                        min: "1"
+                    }, {
+                        type: "radiogroup",
+                        name: "question7",
+                        title: "Avevi già usato dei servizi per controllare se il tuo account fosse stato mai rubato? (ad es. hibp.com)",
+                        choices: [{
+                            value: "item1",
+                            text: "Sì"
+                        }, {
+                            value: "item2",
+                            text: "No"
+                        }, {
+                            value: "item3",
+                            text: "Non ricordo"
+                        }]
+                    }, {
+                        type: "text",
+                        name: "question8",
+                        title: "Quanti tra i siti che ti sono stati mostrati conoscevi?",
+                        description: "Se nessuno, allora inserisci 0",
+                        inputType: "number"
+                    }, {
+                        type: "radiogroup",
+                        name: "question9",
+                        title: "Quale sito ti ha sorpreso di più?",
+                        description: "Nota bene: non tutti i nomi che ti abbiamo mostrato corrispondono ad uno specifico sito. A volte è semplicemente il nome con cui il data breach è famoso in rete.",
+                        choices: ["item1", "item2", "item3"],
+                        choicesByUrl: {
+                            url: urlemail
+                        }
+                    }],
+                    title: "Indagine"
+                }]
+            }
+
+            function sendDataToServer(survey) {
+                survey.sendResult('773c5f45-4731-4359-8cbe-ef8e864cf970');
+            }
+
+            var survey = new Survey.Model(surveyJSON);
+            $("#surveyContainer").Survey({
+                model: survey,
+                onComplete: sendDataToServer
+            });
+
         }
     </script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+
 </body>
 
 </html>
