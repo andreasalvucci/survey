@@ -7,6 +7,7 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
 
+
     <script src="https://unpkg.com/materialize-stepper@3.1.0/dist/js/mstepper.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/materialize-stepper@3.1.0/dist/css/mstepper.min.css">
 
@@ -140,6 +141,37 @@
         </div>
     </div>
 
+    <footer class="page-footer light-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Ulteriori informazioni</h5>
+                    <p class="grey-text text-lighten-4">Mi chiamo Andrea Salvucci, sono studente di Ingegneria Informatica all'Università degli studi di Bologna. Questo sito web è stato realizzato come progetto d'esame per il corso "Cybersecurity M" tenuto dal prof. <a class="grey-text text-lighten-3"
+                            href="https://www.unibo.it/sitoweb/michele.colajanni">Michele Colajanni</a>.
+                    </p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Alcuni link utili</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="https://www.garanteprivacy.it/regolamentoue/databreach">Che cos'è un data breach</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://www.ilsole24ore.com/art/privacy-che-cos-e-gdpr-e-perche-ci-riguarda-AEYGnchE">Che cos'è il GDPR</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://www.youtube.com/watch?v=NS46CxpNXSA">Perché dovresti acquisire consapevolezza (video)</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://haveibeenpwned.com/">Have I been PWNED?</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <p class="grey-text text-lighten-4">
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img class="center-align" alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Quest'opera è distribuita con Licenza <a class="grey-text text-lighten-4" rel="license"
+                        href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 4.0 Internazionale</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
     <script type="text/javascript">
         if (!(typeof(componentHandler) == 'undefined')) {
             componentHandler.upgradeAllRegistered();
@@ -240,186 +272,340 @@
 
 
         function creaSondaggio() {
+
+            var myCss = {
+                navigationButton: "waves-effect waves-dark btn blue next-step"
+            };
+            $("#surveyElement").Survey({
+                model: survey,
+                css: myCss
+            });
+
             var surveyJSON = {
-                pages: [{
-                    name: "anagrafica",
-                    elements: [{
-                        type: "radiogroup",
-                        name: "sesso",
-                        title: "Sesso",
-                        isRequired: true,
-                        choices: [{
-                            value: "item1",
-                            text: "M"
+                "pages": [{
+                    "name": "anagrafica",
+                    "elements": [{
+                        "type": "radiogroup",
+                        "name": "sesso",
+                        "title": "Sesso",
+                        "isRequired": true,
+                        "choices": [{
+                            "value": "item1",
+                            "text": "M"
                         }, {
-                            value: "item2",
-                            text: "F"
+                            "value": "item2",
+                            "text": "F"
                         }, {
-                            value: "item3",
-                            text: "Non-binary"
+                            "value": "item3",
+                            "text": "Non-binary"
                         }],
-                        hasOther: true,
-                        hasNone: true,
-                        noneText: "Altro",
-                        otherText: "Preferisco non specificare"
+                        "hasOther": true,
+                        "hasNone": true,
+                        "noneText": "Altro",
+                        "otherText": "Preferisco non specificare"
                     }, {
-                        type: "radiogroup",
-                        name: "eta",
-                        title: "Età",
-                        isRequired: true,
-                        choices: [{
-                            value: "item1",
-                            text: "<18"
+                        "type": "radiogroup",
+                        "name": "eta",
+                        "title": "Età",
+                        "isRequired": true,
+                        "choices": [{
+                            "value": "item1",
+                            "text": "<18"
                         }, {
-                            value: "item2",
-                            text: "18-24"
+                            "value": "item2",
+                            "text": "18-24"
                         }, {
-                            value: "item3",
-                            text: "24-30"
+                            "value": "item3",
+                            "text": "24-30"
                         }],
-                        hasOther: true,
-                        hasNone: true,
-                        noneText: ">50",
-                        otherText: "35-50"
+                        "hasOther": true,
+                        "hasNone": true,
+                        "noneText": ">50",
+                        "otherText": "35-50"
                     }, {
-                        type: "radiogroup",
-                        name: "question1",
-                        title: "Occupazione",
-                        isRequired: true,
-                        choices: [{
-                            value: "item1",
-                            text: "Sto terminando la scuola superiore"
+                        "type": "radiogroup",
+                        "name": "question1",
+                        "title": "Occupazione",
+                        "isRequired": true,
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Sto terminando la scuola superiore"
                         }, {
-                            value: "item2",
-                            text: "Sto completando la laurea triennale"
+                            "value": "item2",
+                            "text": "Sto completando la laurea triennale"
                         }, {
-                            value: "item3",
-                            text: "Sto completando la laurea magistrale"
+                            "value": "item3",
+                            "text": "Sto completando la laurea magistrale"
                         }, {
-                            value: "item4",
-                            text: "Attualmente sono senza occupazione"
+                            "value": "item4",
+                            "text": "Attualmente sono senza occupazione"
                         }],
-                        hasOther: true,
-                        hasNone: true,
-                        noneText: "Lavoro",
-                        otherText: "Sto completando il dottorato/assegno di ricerca"
+                        "hasOther": true,
+                        "hasNone": true,
+                        "noneText": "Lavoro",
+                        "otherText": "Sto completando il dottorato/assegno di ricerca"
                     }, {
-                        type: "rating",
-                        name: "dimestichezza_informatica",
-                        title: "Quanta dimestichezza hai con il computer e in generale con l'informatica?",
-                        isRequired: true
+                        "type": "rating",
+                        "name": "dimestichezza_informatica",
+                        "title": "Quanta dimestichezza hai con il computer e in generale con l'informatica?",
+                        "isRequired": true
                     }, {
-                        type: "checkbox",
-                        name: "question3",
-                        title: "Per cosa utilizzi l'indirizzo di posta elettronica che hai inserito prima?",
-                        isRequired: true,
-                        choices: [{
-                            value: "item1",
-                            text: "Posta elettronica personale"
+                        "type": "checkbox",
+                        "name": "question3",
+                        "title": "Per cosa utilizzi l'indirizzo di posta elettronica che hai inserito prima?",
+                        "isRequired": true,
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Posta elettronica personale"
                         }, {
-                            value: "item2",
-                            text: "Posta elettronica istituzionale (università)"
+                            "value": "item2",
+                            "text": "Posta elettronica istituzionale (università)"
                         }, {
-                            value: "item3",
-                            text: "Posta elettronica professionale (lavoro)"
+                            "value": "item3",
+                            "text": "Posta elettronica professionale (lavoro)"
                         }],
-                        hasOther: true,
-                        otherText: "Altro (descrivi)"
+                        "hasOther": true,
+                        "otherText": "Altro (descrivi)"
                     }, {
-                        type: "radiogroup",
-                        name: "question2",
-                        title: "Da quanto tempo usi quell'indirizzo e-mail?",
-                        isRequired: true,
-                        choices: [{
-                            value: "item1",
-                            text: "Meno di un anno"
+                        "type": "radiogroup",
+                        "name": "question2",
+                        "title": "Da quanto tempo usi quell'indirizzo e-mail?",
+                        "isRequired": true,
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Meno di un anno"
                         }, {
-                            value: "item2",
-                            text: "Meno di cinque anni"
+                            "value": "item2",
+                            "text": "Meno di cinque anni"
                         }, {
-                            value: "item3",
-                            text: "Più di cinque anni"
+                            "value": "item3",
+                            "text": "Più di cinque anni"
                         }]
                     }, {
-                        type: "radiogroup",
-                        name: "question4",
-                        title: "Condividi con qualcuno quell'indirizzo e-mail?",
-                        isRequired: true,
-                        choices: [{
-                            value: "item1",
-                            text: "Sì"
+                        "type": "radiogroup",
+                        "name": "question4",
+                        "title": "Condividi con qualcuno quell'indirizzo e-mail?",
+                        "isRequired": true,
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Sì"
                         }, {
-                            value: "item2",
-                            text: "No"
+                            "value": "item2",
+                            "text": "No"
                         }]
                     }, {
-                        type: "radiogroup",
-                        name: "question5",
-                        title: "Quanti altri indirizzi e-mail possiedi?",
-                        choices: [{
-                            value: "item1",
-                            text: "Nessun altro"
+                        "type": "radiogroup",
+                        "name": "question5",
+                        "title": "Quanti altri indirizzi e-mail possiedi?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Nessun altro"
                         }, {
-                            value: "item2",
-                            text: "Almeno un altro"
+                            "value": "item2",
+                            "text": "Almeno un altro"
                         }, {
-                            value: "item3",
-                            text: "Più di due"
+                            "value": "item3",
+                            "text": "Più di due"
+                        }]
+                    }, {
+                        "type": "radiogroup",
+                        "name": "question12",
+                        "title": "Utilizzi l'autenticazione a due (o più) fattori?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Sì"
+                        }, {
+                            "value": "item2",
+                            "text": "Ovunque"
+                        }, {
+                            "value": "item3",
+                            "text": "Solo quando richiesto esplicitamente dall'applicazione"
+                        }, {
+                            "value": "item4",
+                            "text": "No"
+                        }, {
+                            "value": "item5",
+                            "text": "Non so nemmeno cosa sia!"
+                        }]
+                    }, {
+                        "type": "radiogroup",
+                        "name": "question13",
+                        "title": "Come gestisci le tue password?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Ne uso solamente una per tutti o la maggior parte dei miei account"
+                        }, {
+                            "value": "item2",
+                            "text": "Uso molte password diverse per tutti i i miei account"
+                        }, {
+                            "value": "item3",
+                            "text": "Utilizzo un gestore di password"
                         }]
                     }],
-                    title: "Sondaggio"
+                    "title": "Sondaggio"
                 }, {
-                    name: "page1",
-                    elements: [{
-                        type: "text",
-                        name: "question6",
-                        title: "Di quanti data breach sei stat* vittima?",
-                        description: "Puoi tornare indietro per ri-controllare",
-                        inputType: "number",
-                        min: "1"
+                    "name": "awareness",
+                    "elements": [{
+                        "type": "text",
+                        "name": "question6",
+                        "title": "Di quanti data breach sei stat* vittima?",
+                        "description": "Puoi tornare indietro per ri-controllare",
+                        "inputType": "number",
+                        "min": "1"
                     }, {
-                        type: "radiogroup",
-                        name: "question7",
-                        title: "Avevi già usato dei servizi per controllare se il tuo account fosse stato mai rubato? (ad es. hibp.com)",
-                        choices: [{
-                            value: "item1",
-                            text: "Sì"
+                        "type": "radiogroup",
+                        "name": "question7",
+                        "title": "Avevi già usato dei servizi per controllare se il tuo account fosse stato mai rubato? (ad es. hibp.com)",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Sì"
                         }, {
-                            value: "item2",
-                            text: "No"
+                            "value": "item2",
+                            "text": "No"
                         }, {
-                            value: "item3",
-                            text: "Non ricordo"
+                            "value": "item3",
+                            "text": "Non ricordo"
                         }]
                     }, {
-                        type: "text",
-                        name: "question8",
-                        title: "Quanti tra i siti che ti sono stati mostrati conoscevi?",
-                        description: "Se nessuno, allora inserisci 0",
-                        inputType: "number"
+                        "type": "text",
+                        "name": "question8",
+                        "title": "Quanti tra i siti che ti sono stati mostrati conoscevi?",
+                        "description": "Se nessuno, allora inserisci 0",
+                        "inputType": "number"
                     }, {
-                        type: "radiogroup",
-                        name: "question9",
-                        title: "Quale sito ti ha sorpreso di più?",
-                        description: "Nota bene: non tutti i nomi che ti abbiamo mostrato corrispondono ad uno specifico sito. A volte è semplicemente il nome con cui il data breach è famoso in rete.",
-                        choices: ["item1", "item2", "item3"],
-                        choicesByUrl: {
-                            url: urlemail
+                        "type": "radiogroup",
+                        "name": "question9",
+                        "title": "Quale sito ti ha sorpreso di più?",
+                        "description": "Nota bene: non tutti i nomi che ti abbiamo mostrato corrispondono ad uno specifico sito. A volte è semplicemente il nome con cui il data breach è famoso in rete.",
+                        "choices": ["item1", "item2", "item3"],
+                        "choicesByUrl": {
+                            "url": urlemail
                         }
+                    }, {
+                        "type": "comment",
+                        "name": "question10",
+                        "title": "Puoi dirci perché?"
+                    }, {
+                        "type": "checkbox",
+                        "name": "question11",
+                        "title": "Quali tra i dati che potrebbero esserti stati sottratti ritieni più importanti?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "I miei dati anagrafici"
+                        }, {
+                            "value": "item2",
+                            "text": "Il mio numero di cellulare"
+                        }, {
+                            "value": "item3",
+                            "text": "Le mie credenziali (nome utente e password)"
+                        }, {
+                            "value": "item4",
+                            "text": "Dati della mia carta di credito"
+                        }],
+                        "hasOther": true,
+                        "otherText": "Altro (specifica)",
+                        "selectAllText": "Altro (specifica)"
                     }],
-                    title: "Indagine"
+                    "title": "Consapevolezza"
+                }, {
+                    "name": "risposta_emotiva",
+                    "elements": [{
+                        "type": "rating",
+                        "name": "question14",
+                        "title": "Da 1 a 10 quanto sei preoccupat* per i furti di dati che hai subito?",
+                        "rateMax": 10
+                    }, {
+                        "type": "text",
+                        "name": "question15",
+                        "title": "Puoi dirci molto brevemente perché?"
+                    }, {
+                        "type": "radiogroup",
+                        "name": "question16",
+                        "title": "Ti hanno mai informat* di questi data breach?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Sì"
+                        }, {
+                            "value": "item2",
+                            "text": "No"
+                        }, {
+                            "value": "item3",
+                            "text": "Non ricordo"
+                        }]
+                    }, {
+                        "type": "radiogroup",
+                        "name": "question17",
+                        "title": "Se non ti hanno mai informat*, che emozione ti provoca?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Mi lascia totalmente indifferente"
+                        }, {
+                            "value": "item2",
+                            "text": "Avrei voluto saperlo, ma pazienza"
+                        }, {
+                            "value": "item3",
+                            "text": "Mi fa rabbia"
+                        }],
+                        "hasOther": true,
+                        "otherText": "Altro (specifica)"
+                    }],
+                    "title": "Reazioni"
+                }, {
+                    "name": "provvedimenti",
+                    "elements": [{
+                        "type": "rating",
+                        "name": "question18",
+                        "title": "Se venissi informato da fonti esterne, con quale probabilità prenderesti provvedimenti da 1 a 10?",
+                        "description": "Per provvedimenti intendiamo ad esempio una denuncia",
+                        "rateMax": 10
+                    }, {
+                        "type": "rating",
+                        "name": "question19",
+                        "title": "Se invece fosse il sito stesso vittima di data breach ad informarti, con quale probabilità prenderesti provvedimenti da 1 a 10?",
+                        "rateMax": 10
+                    }, {
+                        "type": "checkbox",
+                        "name": "question20",
+                        "title": "In quest'ultimo caso cosa vorresti sentirti dire dal sito titolare del trattamento dei tuoi dati che è stato violato?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Vorrei delle scuse"
+                        }, {
+                            "value": "item2",
+                            "text": "Vorrei un risarcimento monetario"
+                        }, {
+                            "value": "item3",
+                            "text": "Vorrei che ponesse rimedio aumentando la sicurezza dei suoi sistemi"
+                        }],
+                        "hasOther": true,
+                        "otherText": "Altro (specifica)"
+                    }, {
+                        "type": "checkbox",
+                        "name": "question21",
+                        "title": "Nel tuo piccolo, cosa faresti per evitare altri spiacevoli furti di dati?",
+                        "choices": [{
+                            "value": "item1",
+                            "text": "Starei più attent* a gestire le mie password"
+                        }, {
+                            "value": "item2",
+                            "text": "Starei alla larga da quel sito"
+                        }, "item3"]
+                    }],
+                    "title": "Provvedimenti"
                 }]
             }
 
-            function sendDataToServer(survey) {
-                survey.sendResult('773c5f45-4731-4359-8cbe-ef8e864cf970');
-            }
 
             var survey = new Survey.Model(surveyJSON);
             $("#surveyContainer").Survey({
                 model: survey,
                 onComplete: sendDataToServer
             });
+
+            function sendDataToServer(survey) {
+                survey.sendResult('773c5f45-4731-4359-8cbe-ef8e864cf970');
+            }
+
 
         }
     </script>
