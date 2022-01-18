@@ -258,7 +258,7 @@
 
                 divLista.appendChild(lista);
                 console.log(data);
-                var primo = true;
+                var contaFinoATre = 0;
                 for (i in data) {
                     breach = data[i];
                     elemento = document.createElement('li');
@@ -277,7 +277,8 @@
                     collapsibleBody.appendChild(intestazioneDescrizione);
                     contenuto = document.createElement('span');
                     collapsibleHeader.innerHTML = breach.Name;
-                    if (primo) {
+                    if (contaFinoATre < 3) {
+                        contaFinoATre++;
                         primo = false;
                         leggimi = document.createElement('span');
                         leggimi.className = "new badge blue";
