@@ -3,7 +3,6 @@ var needle = require('needle');
 var express = require('express');
 var app = express().use(express.static(__dirname + '/'));
 var http = require('http').Server(app);
-var fetch = require('node-fetch')
 
 app.get("/", function(request, response) {
     response.sendFile(__dirname + "index2.html");
