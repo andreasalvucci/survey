@@ -258,10 +258,15 @@
 
                 divLista.appendChild(lista);
                 console.log(data);
+                var primo = true;
                 for (i in data) {
                     breach = data[i];
                     elemento = document.createElement('li');
                     collapsibleHeader = document.createElement('div');
+
+
+
+
 
                     collapsibleBody = document.createElement('div');
                     collapsibleHeader.className = "collapsible-header";
@@ -272,6 +277,15 @@
                     collapsibleBody.appendChild(intestazioneDescrizione);
                     contenuto = document.createElement('span');
                     collapsibleHeader.innerHTML = breach.Name;
+                    if (primo) {
+                        primo = false;
+                        leggimi = document.createElement('span');
+                        leggimi.className = "new badge blue";
+                        leggimi.setAttribute("data-badge-caption", "Clicca per maggiori info");
+                        collapsibleHeader.appendChild(leggimi);
+
+                    }
+
                     getDescrizione(breach.Name, contenuto);
 
                     collapsibleBody.appendChild(contenuto);
