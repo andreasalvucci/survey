@@ -44,6 +44,7 @@
         "webpack-dev-server": "^1.14.1"
     },
     "dependencies": {
+        "express": "*",
         "materialize-stepper": "^3.1.0",
         "needle": "^3.0.0",
         "string-sanitizer": "^2.0.2",
