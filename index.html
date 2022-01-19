@@ -162,8 +162,11 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Ulteriori informazioni</h5>
-                    <p class="grey-text text-lighten-4">Mi chiamo Andrea Salvucci, sono studente di Ingegneria Informatica all'Università degli studi di Bologna. Questo sito web è stato realizzato come progetto d'esame per il corso "Cybersecurity M" tenuto dal prof. <a class="grey-text text-lighten-3"
+                    <p class="grey-text text-lighten-4">Mi chiamo Andrea Salvucci, sono uno studente di Ingegneria Informatica all'Università degli Studi di Bologna. Questo sito web è stato realizzato come progetto d'esame per il corso "Cybersecurity M" tenuto dal prof. <a class="grey-text text-lighten-3"
                             href="https://www.unibo.it/sitoweb/michele.colajanni">Michele Colajanni</a>.
+                    </p>
+                    <p class="grey-text-lighten-4">
+                        L'articolo scientifico sul quale mi sono basato per condurre questo esperimento è reperibile <a class="grey-text text-lighten-3" href="https://www.usenix.org/conference/usenixsecurity21/presentation/mayer"><u>a questo link</u></a>
                     </p>
                 </div>
                 <div class="col l4 offset-l2 s12">
@@ -392,6 +395,7 @@
 
 
             var surveyJSON = {
+                locale: "it",
                 pages: [{
                     name: "anagrafica",
                     elements: [{
@@ -443,7 +447,7 @@
                         otherText: "35-50"
                     }, {
                         type: "radiogroup",
-                        name: "question1",
+                        name: "occupazione",
                         title: "Occupazione",
                         isRequired: true,
                         choices: [{
@@ -474,7 +478,7 @@
                         isRequired: true
                     }, {
                         type: "checkbox",
-                        name: "question3",
+                        name: "per_cosa_utilizza_email",
                         title: "Per cosa utilizzi l'indirizzo di posta elettronica che hai inserito prima?",
                         isRequired: true,
                         choices: [{
@@ -491,7 +495,7 @@
                         otherText: "Altro (descrivi)"
                     }, {
                         type: "radiogroup",
-                        name: "question2",
+                        name: "da_quanto_tempo_indirizzo",
                         title: "Da quanto tempo usi quell'indirizzo e-mail?",
                         isRequired: true,
                         choices: [{
@@ -506,7 +510,7 @@
                         }]
                     }, {
                         type: "radiogroup",
-                        name: "question4",
+                        name: "condivide_indirizzi",
                         title: "Condividi con qualcuno quell'indirizzo e-mail?",
                         isRequired: true,
                         choices: [{
@@ -518,8 +522,9 @@
                         }]
                     }, {
                         type: "radiogroup",
-                        name: "question5",
+                        name: "quanti_altri_indirizzi",
                         title: "Quanti altri indirizzi e-mail possiedi?",
+                        isRequired: true,
                         choices: [{
                             value: "nessunaltro",
                             text: "Nessun altro"
@@ -532,14 +537,15 @@
                         }]
                     }, {
                         type: "radiogroup",
-                        name: "question12",
+                        name: "usa_2fa",
                         title: "Utilizzi l'autenticazione a due (o più) fattori?",
+                        isRequired: true,
                         choices: [{
                             value: "si",
-                            text: "Sì"
+                            text: "Sì, per la maggior parte dei casi"
                         }, {
                             value: "ovunque",
-                            text: "Ovunque"
+                            text: "Sì, la uso ovunque"
                         }, {
                             value: "solosenecessario",
                             text: "Solo quando richiesto esplicitamente dall'applicazione"
@@ -547,22 +553,50 @@
                             value: "no",
                             text: "No"
                         }, {
+                            value: "quasi mai",
+                            text: "Quasi mai"
+                        }, {
                             value: "nonsocose",
                             text: "Non so nemmeno cosa sia!"
                         }]
                     }, {
                         type: "radiogroup",
-                        name: "question13",
+                        name: "perche_no_2fa",
+                        visibleIf: "{usa_2fa} anyof ['no', 'quasi mai']",
+                        title: "Perché non utilizzi l'autenticazione multi-fattore?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "ci vuole una vita per fare il log-in"
+                        }, {
+                            value: "item2",
+                            text: "non mi va"
+                        }, {
+                            value: "item3",
+                            text: "non credo sia utile"
+                        }, {
+                            value: "item4",
+                            text: "cambio spesso numero di telefono"
+                        }],
+                        hasOther: true,
+                        otherText: "Altro (specifica)"
+                    }, {
+                        type: "radiogroup",
+                        name: "come_gestisci_password",
                         title: "Come gestisci le tue password?",
+                        isRequired: true,
                         choices: [{
                             value: "item1",
                             text: "Ne uso solamente una per tutti o la maggior parte dei miei account"
                         }, {
                             value: "item2",
-                            text: "Uso molte password diverse per tutti i i miei account"
+                            text: "Uso molte password diverse per tutti i miei account"
                         }, {
                             value: "item3",
-                            text: "Utilizzo un gestore di password"
+                            text: "Utilizzo un gestore di password (ad es. Keepass)"
+                        }, {
+                            value: "item4",
+                            text: "Le faccio generare per me da Google"
                         }],
                         hasOther: true,
                         otherText: "Altro (descrivi)"
@@ -596,6 +630,7 @@
                         name: "numero_data_breach",
                         title: "Di quanti data breach sei stat* vittima?",
                         description: "Puoi tornare indietro per ri-controllare",
+                        isRequired: true,
                         inputType: "number",
                         min: "1"
                     }, {
@@ -603,10 +638,11 @@
                         name: "quanti_siti_ricorda_di_essersi_registrato",
                         title: "Quanti tra i siti o servizi che ti sono stati mostrati hai memoria di essertici registrat*?",
                         description: "Se nessuno, allora inserisci 0",
+                        isRequired: true,
                         inputType: "number"
                     }, {
                         type: "checkbox",
-                        name: "question11",
+                        name: "dati_che_ritiene_piu_importanti",
                         title: "Quali tra i dati che potrebbero esserti stati sottratti ritieni più importanti? (Puoi selezionare più opzioni)",
                         isRequired: true,
                         choices: [{
@@ -637,18 +673,18 @@
                     name: "risposta_emotiva",
                     elements: [{
                         type: "rating",
-                        name: "question14",
-                        title: "Da 1 a 10 quanto sei preoccupat* per i furti di dati che hai subito?",
+                        name: "quanto_sei_preoccupat",
+                        title: "Da 1 a 5 quanto sei preoccupat* per i furti di dati che hai subito?",
                         minRateDescription: "Per nulla preoccupat*",
                         maxRateDescription: "Estremamente preoccupat*"
                     }, {
                         type: "text",
-                        name: "question15",
+                        name: "motivo_preoccupazione",
                         title: "Puoi dirci molto brevemente perché?",
                         isRequired: true
                     }, {
                         type: "radiogroup",
-                        name: "question16",
+                        name: "sei_stato_informato",
                         title: "Ti hanno mai informat* di questi data breach?",
                         isRequired: true,
                         choices: [{
@@ -663,8 +699,9 @@
                         }]
                     }, {
                         type: "radiogroup",
-                        name: "question17",
+                        name: "reazione_non_informato",
                         title: "Se non ti hanno mai informat*, che emozione ti provoca?",
+                        isRequired: true,
                         choices: [{
                             value: "item1",
                             text: "Mi lascia totalmente indifferente"
@@ -685,16 +722,15 @@
                     elements: [{
                         type: "rating",
                         name: "question18",
-                        title: "Se venissi informato da fonti esterne, con quale probabilità prenderesti provvedimenti da 1 a 10?",
-                        description: "Per provvedimenti intendiamo ad esempio una denuncia",
-                        isRequired: true,
-                        rateMax: 10
+                        title: "Se venissi informato da fonti esterne, con quale probabilità prenderesti provvedimenti da 1 a 5?",
+                        description: "Tipicamente sono i media che informano gli utenti di un dato servizio che c'è stato un data breach",
+                        isRequired: true
                     }, {
                         type: "rating",
-                        name: "question19",
-                        title: "Se invece fosse il sito stesso ad informarti, con quale probabilità prenderesti provvedimenti da 1 a 10?",
-                        isRequired: true,
-                        rateMax: 10
+                        name: "prob_provvedimenti_comunicato",
+                        title: "Se invece fosse il sito stesso ad informarti, con quale probabilità prenderesti provvedimenti da 1 a 5?",
+                        description: "A volte, però, è il sito stesso con dei comunicati stampa ad informare i propri clienti, spesso con risultati disastrosi (vedi il caso di Ho Mobile del 2021)",
+                        isRequired: true
                     }, {
                         type: "checkbox",
                         name: "question20",
@@ -737,7 +773,9 @@
                     }],
                     title: "Sezione 4 - Provvedimenti",
                     description: "In questa quarta e ultima sezione ti chiediamo quali provvedimenti saresti dispost* a prendere"
-                }]
+                }],
+                showProgressBar: "top",
+                widthMode: "responsive"
             }
 
 
