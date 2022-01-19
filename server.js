@@ -101,5 +101,5 @@ app.get('/extbreaches', (req, res) => {
 
 
 http.listen(PORT, function() {
-    console.log("Node server listening on port " + port);
+    console.log("Node server listening on port " + PORT);
 });
