@@ -46,6 +46,10 @@ app.get('/hibp', (req, res) => {
 
 });
 
+app.get('*', function(req, res) {
+    res.sendFile(__dirname + '/page404.html');
+});
+
 http.listen(PORT, function() {
     console.log("Node server listening on port " + PORT);
 });
