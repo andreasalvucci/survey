@@ -39,7 +39,7 @@
     </style>
 
 
-    <title>Sono vittima?</title>
+    <title>Dove sono i miei dati?</title>
 </head>
 
 <body>
@@ -72,7 +72,7 @@
                                         </blockquote>
 
                                         <blockquote>
-                                            Ci tengo a ricordarti che <b>in nessun modo</b> alcuno dei tuoi dati che fornirai verrà salvato. Il sondaggio finale è <b>anonimo</b>.
+                                            Ci tengo ad che <b>in nessun modo</b> i tuoi dati che fornirai verranno salvati sul server. Il sondaggio finale è del tutto <b>anonimo</b>.
                                         </blockquote>
                                     </div>
                                     <div class="step-actions">
@@ -84,7 +84,8 @@
                                 <div class="step-title waves-effect waves-dark">La tua e-mail</div>
                                 <div class="step-content">
                                     <div class="row">
-                                        <blockquote>Inserisci qui il tuo indirizzo e-mail che usi più di frequente (ad esempio per registrarti ad un sito). Ancora una volta ti ricordiamo che <b>non verrà conservato</b> da nessuna parte, nel rispetto della tua privacy.
+                                        <blockquote>Inserisci qui il tuo indirizzo e-mail che usi più di frequente (ad esempio quello che usi per registrarti ad un sito). Ancora una volta ti ricordiamo che <b>non verrà conservato</b> da nessuna parte, nel rispetto
+                                            della tua privacy.
                                         </blockquote>
                                         <div class="input-field col s12">
                                             <input id="email" name="email" type="email" class="validate" required>
@@ -92,8 +93,9 @@
                                         </div>
                                     </div>
                                     <div class="step-actions">
-                                        <button class="waves-effect waves-dark btn blue next-step" onclick="myAPI()" data-feedback="anyThing">Avanti</button>
                                         <button class="waves-effect waves-dark btn-flat previous-step">Indietro</button>
+                                        <button class="waves-effect waves-dark btn blue next-step" onclick="myAPI()" data-feedback="anyThing">Avanti</button>
+
                                     </div>
                                 </div>
                             </li>
@@ -111,8 +113,9 @@
                                     </div>
 
                                     <div class="step-actions" style="position: static">
-                                        <button id="continuaAlSondaggio" class="waves-effect waves-dark btn blue next-step" onclick="checkMobileAndCreaSondaggio()">Avanti</button>
                                         <button class="waves-effect waves-dark btn-flat previous-step">Indietro</button>
+                                        <button id="continuaAlSondaggio" class="waves-effect waves-dark btn blue next-step" onclick="checkMobileAndCreaSondaggio()">Avanti</button>
+
 
                                     </div>
 
@@ -144,7 +147,8 @@
     </div>
     <div id="modalRuotaDispositivo" class="modal">
         <div class="modal-content">
-            <h4>Ruota il tuo dispositivo!</h4>
+            <h4>Ruota il tuo dispositivo!<i class="material-icons"></i>rotate_90_degrees_ccw</i>
+            </h4>
             <p>Hey, abbiamo notato che ci stai visitando da uno smartphone. Per la compilazione del sondaggio ti consigliamo di ruotarlo in modalità orizzontale. Grazie!
             </p>
         </div>
