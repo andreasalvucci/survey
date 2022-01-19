@@ -1,4 +1,4 @@
-var port = 8080;
+const PORT = process.env.PORT || 3000;
 var needle = require('needle');
 var express = require('express');
 var app = express().use(express.static(__dirname + '/'));
@@ -100,6 +100,6 @@ app.get('/extbreaches', (req, res) => {
 
 
 
-http.listen(port, function() {
+http.listen(PORT, function() {
     console.log("Node server listening on port " + port);
 });
