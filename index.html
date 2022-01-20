@@ -234,7 +234,6 @@
         }
 
         var stepperDiv = document.querySelector('.stepper');
-        console.log(stepperDiv);
         var stepper = new MStepper(stepperDiv);
     </script>
 
@@ -245,8 +244,6 @@
             email = document.getElementById("email").value;
             url_encoded_email = encodeURIComponent(email)
 
-            console.log('la mail selezionata e ' + email)
-            console.log('la mail url encoded e ' + url_encoded_email)
 
 
             fetch('./hibp?email=' + url_encoded_email)
@@ -275,7 +272,6 @@
 
 
         function printBreach(data) {
-            console.log(data.ok);
             if (data.ok == "ok") {
                 divRisultato = document.getElementById("risultato");
                 h2Risultato = document.createElement('h2');
@@ -302,7 +298,6 @@
                 lista.className = "collapsible";
 
                 divLista.appendChild(lista);
-                console.log(data);
                 var contaFinoATre = 0;
                 for (i in data) {
                     breach = data[i];
@@ -368,7 +363,6 @@
                         elementoRubato = document.createElement('li');
                         elementoRubato.className = "collection-item";
                         elementoRubato.innerHTML = data.DataClasses[cosaRubata];
-                        console.log(data.DataClasses[cosaRubata]);
                         listaCoseRubate.appendChild(elementoRubato);
                     }
                     elemento.innerHTML = data.Description;
