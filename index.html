@@ -196,6 +196,10 @@
             $('.modalRuotaDispositivo').modal();
         });
 
+        {
+            var vittima = false;
+        }
+
         function checkMobileAndCreaSondaggio() {
             const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
@@ -274,13 +278,14 @@
                 h2Risultato = document.createElement('h2');
                 blockquoteRisultato = document.createElement('blockquote');
                 blockquoteRisultato.innerHTML = "Il tuo indirizzo e-mail non risulta in nessuno dei data breach a nostra conoscenza. Puoi provare con un" +
-                    " altro indirizzo o abbandonare il sito. Grazie!";
+                    " altro indirizzo o proseguire con un breve sondaggio. Grazie!";
                 h2Risultato.innerHTML = "Buone notizie!";
                 divRisultato.appendChild(h2Risultato);
                 divRisultato.appendChild(blockquoteRisultato);
-                bottoneAlSondaggio = document.getElementById("continuaAlSondaggio");
-                bottoneAlSondaggio.disabled = "true";
+                //bottoneAlSondaggio = document.getElementById("continuaAlSondaggio");
+                //bottoneAlSondaggio.disabled = "false";
             } else {
+                vittima = true;
                 divRisultato = document.getElementById("risultato");
                 h2Risultato = document.createElement('h2');
                 blockquoteRisultato = document.createElement('blockquote');
@@ -392,9 +397,315 @@
             };
 
 
+            var surveyNonVittima = {
+                locale: "it",
+                pages: [{
+                    name: "anagrafica",
+                    elements: [{
+                        type: "radiogroup",
+                        name: "sesso",
+                        title: "Sesso",
+                        isRequired: true,
+                        choices: [{
+                            value: "M",
+                            text: "M"
+                        }, {
+                            value: "F",
+                            text: "F"
+                        }, {
+                            value: "NB",
+                            text: "Non-binary"
+                        }, {
+                            value: "NS",
+                            text: "Preferisco non specificare"
+                        }],
+                        hasNone: true,
+                        noneText: "Altro",
+                        otherText: "Preferisco non specificare"
+                    }, {
+                        type: "radiogroup",
+                        name: "eta",
+                        title: "Età",
+                        isRequired: true,
+                        choices: [{
+                            value: "minorenni",
+                            text: "<18"
+                        }, {
+                            value: "diciottoventiquattro",
+                            text: "18-24"
+                        }, {
+                            value: "ventiquattrotrenta",
+                            text: "24-30"
+                        }, {
+                            value: "trentacinquanta",
+                            text: "30-50"
+                        }, {
+                            value: "cinquantasessantacinque",
+                            text: "50-65"
+                        }, {
+                            value: "oversessantacinque",
+                            text: ">65"
+                        }],
+                        noneText: ">50",
+                        otherText: "35-50"
+                    }, {
+                        type: "radiogroup",
+                        name: "occupazione",
+                        title: "Occupazione",
+                        isRequired: true,
+                        choices: [{
+                            value: "liceale",
+                            text: "Sto terminando la scuola superiore"
+                        }, {
+                            value: "triennale",
+                            text: "Sto completando la laurea triennale"
+                        }, {
+                            value: "magistrale",
+                            text: "Sto completando la laurea magistrale"
+                        }, {
+                            value: "dottorato",
+                            text: "Sto completando l'assegno/dottorato di ricerca"
+                        }, {
+                            value: "lavoratore",
+                            text: "Lavoro"
+                        }, {
+                            value: "disoccupato",
+                            text: "Attualmente sono senza occupazione"
+                        }],
+                        noneText: "Lavoro",
+                        otherText: "Sto completando il dottorato/assegno di ricerca"
+                    }, {
+                        type: "rating",
+                        name: "dimestichezza_informatica",
+                        title: "Quanta dimestichezza hai con il computer e in generale con l'informatica?",
+                        isRequired: true
+                    }, {
+                        type: "checkbox",
+                        name: "per_cosa_utilizza_email",
+                        title: "Per cosa utilizzi l'indirizzo di posta elettronica che hai inserito prima?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Posta elettronica personale"
+                        }, {
+                            value: "item2",
+                            text: "Posta elettronica istituzionale (università)"
+                        }, {
+                            value: "item3",
+                            text: "Posta elettronica professionale (lavoro)"
+                        }],
+                        hasOther: true,
+                        otherText: "Altro (descrivi)"
+                    }, {
+                        type: "radiogroup",
+                        name: "da_quanto_tempo_indirizzo",
+                        title: "Da quanto tempo usi quell'indirizzo e-mail?",
+                        isRequired: true,
+                        choices: [{
+                            value: "menounanno",
+                            text: "Meno di un anno"
+                        }, {
+                            value: "menocinqueanni",
+                            text: "Meno di cinque anni"
+                        }, {
+                            value: "piucinqueanni",
+                            text: "Più di cinque anni"
+                        }]
+                    }, {
+                        type: "radiogroup",
+                        name: "condivide_indirizzi",
+                        title: "Condividi con qualcuno quell'indirizzo e-mail?",
+                        isRequired: true,
+                        choices: [{
+                            value: "condivideemail",
+                            text: "Sì"
+                        }, {
+                            value: "noncondivideemail",
+                            text: "No"
+                        }]
+                    }, {
+                        type: "radiogroup",
+                        name: "quanti_altri_indirizzi",
+                        title: "Quanti altri indirizzi e-mail possiedi?",
+                        isRequired: true,
+                        choices: [{
+                            value: "nessunaltro",
+                            text: "Nessun altro"
+                        }, {
+                            value: "unaltro",
+                            text: "Un altro"
+                        }, {
+                            value: "piudidue",
+                            text: "Più di due"
+                        }]
+                    }, {
+                        type: "radiogroup",
+                        name: "usa_2fa",
+                        title: "Utilizzi l'autenticazione a due (o più) fattori?",
+                        isRequired: true,
+                        choices: [{
+                            value: "si",
+                            text: "Sì, per la maggior parte dei casi"
+                        }, {
+                            value: "ovunque",
+                            text: "Sì, la uso ovunque"
+                        }, {
+                            value: "solosenecessario",
+                            text: "Solo quando richiesto esplicitamente dall'applicazione"
+                        }, {
+                            value: "no",
+                            text: "No"
+                        }, {
+                            value: "quasi mai",
+                            text: "Quasi mai"
+                        }, {
+                            value: "nonsocose",
+                            text: "Non so nemmeno cosa sia!"
+                        }]
+                    }, {
+                        type: "radiogroup",
+                        name: "perche_no_2fa",
+                        visibleIf: "{usa_2fa} anyof ['no', 'quasi mai']",
+                        title: "Perché non utilizzi l'autenticazione multi-fattore?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "ci vuole una vita per fare il log-in"
+                        }, {
+                            value: "item2",
+                            text: "non mi va"
+                        }, {
+                            value: "item3",
+                            text: "non credo sia utile"
+                        }, {
+                            value: "item4",
+                            text: "cambio spesso numero di telefono"
+                        }],
+                        hasOther: true,
+                        otherText: "Altro (specifica)"
+                    }, {
+                        type: "radiogroup",
+                        name: "come_gestisci_password",
+                        title: "Come gestisci le tue password?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Ne uso solamente una per tutti o la maggior parte dei miei account"
+                        }, {
+                            value: "item2",
+                            text: "Uso molte password diverse per tutti i miei account"
+                        }, {
+                            value: "item3",
+                            text: "Utilizzo un gestore di password (ad es. Keepass)"
+                        }, {
+                            value: "item4",
+                            text: "Le faccio generare per me da Google"
+                        }],
+                        hasOther: true,
+                        otherText: "Altro (descrivi)"
+                    }],
+                    title: "Sezione 1 - Abitudini",
+                    description: "Benvenut* a questo sondaggio, ti preghiamo di rispondere nella tua massima sincerità, per avere dei dati quanto più corretti possibili per lo scopo finale di questa indagine. Le tue risposte saranno trattate in maniera aggregata, in nessun modo sarà possibile risalire alla tua identità. Non ti verrà più chiesto l'indirizzo e-mail e comunque non l'abbiamo salvato da nessuna parte. Grazie e buona compilazione!"
+                }, {
+                    name: "awareness",
+                    elements: [{
+                        type: "radiogroup",
+                        name: "e_stata_sorpresa_essere_al_sicuro",
+                        title: "Non trovare i tuoi dati in dei data breach è stata per te una sorpresa?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Sì"
+                        }, {
+                            value: "item2",
+                            text: "No"
+                        }],
+                        choicesByUrl: {
+                            titleName: "name"
+                        }
+                    }, {
+                        type: "comment",
+                        name: "dicci_perche_e_sorpresa",
+                        visibleIf: "{e_stata_sorpresa_essere_al_sicuro} = 'item1'",
+                        title: "Puoi dirci perché ti ha sorpres*? (brevemente)"
+                    }, {
+                        type: "comment",
+                        name: "question3",
+                        visibleIf: "{e_stata_sorpresa_essere_al_sicuro} = 'item2'",
+                        title: "Puoi dirci perché NON ti ha sorpres*? (brevemente)"
+                    }, {
+                        type: "radiogroup",
+                        name: "question2",
+                        title: "Cosa credi che abbia fatto sì che tu non sia stat* vittima di data breach?",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "Pura fortuna"
+                        }, {
+                            value: "item2",
+                            text: "Il mio indirizzo e-mail è giovane"
+                        }, {
+                            value: "item3",
+                            text: "Non mi registro così spesso ai siti web"
+                        }, {
+                            value: "item4",
+                            text: "Utilizzo solo servizi web che ritengo \"sicuri\""
+                        }, {
+                            value: "item5",
+                            text: "Non saprei"
+                        }],
+                        hasOther: true,
+                        otherText: "Altro (specifica)"
+                    }, {
+                        type: "rating",
+                        name: "quanto_ti_ritieni_al_sicuro",
+                        title: "Quanto ti ritieni \"al sicuro\" ora che sai di non essere vittima di data breach?",
+                        isRequired: true
+                    }, {
+                        type: "checkbox",
+                        name: "dati_che_ritiene_piu_importanti",
+                        title: "Quali tra i dati che ti potrebbero essere sottratti in futuro ritieni più importanti? (Puoi selezionare più opzioni)",
+                        isRequired: true,
+                        choices: [{
+                            value: "item1",
+                            text: "I miei dati anagrafici (nome, cognome, indirizzo di residenza, ...)"
+                        }, {
+                            value: "item2",
+                            text: "Il mio numero di cellulare"
+                        }, {
+                            value: "item3",
+                            text: "Le mie credenziali (nome utente e password)"
+                        }, {
+                            value: "item4",
+                            text: "Dati della mia carta di credito"
+                        }],
+                        hasOther: true,
+                        otherText: "Altro (specifica)",
+                        selectAllText: "Altro (specifica)"
+                    }],
+                    title: "Sezione 2 - Consapevolezza",
+                    description: "Come ti abbiamo detto, il tuo indirizzo e-mail non è stato trovato in nessun data breach a nostra conoscenza. Quindi puoi dormire sonni tranquilli...per ora! Ti chiediamo comunque di rispondere a qualche breve domanda"
+                }, {
+                    name: "risposta_emotiva",
+                    elements: [{
+                        type: "rating",
+                        name: "quanto_sei_preoccupat",
+                        title: "Da 1 a 5 quanto saresti preoccupat* per i furti di dati che potresti subire?",
+                        minRateDescription: "Per nulla preoccupat*",
+                        maxRateDescription: "Estremamente preoccupat*"
+                    }, {
+                        type: "text",
+                        name: "motivo_preoccupazione",
+                        title: "Puoi dirci molto brevemente perché?",
+                        isRequired: true
+                    }],
+                    title: "Sezione 3 - Reazioni",
+                    description: "In questa sezione ti chiediamo di riportare molto sinteticamente quelle che sono le tue reazioni emotive nel momento in cui potresti venire a conoscenza che i tuoi dati personali sono stati violati."
+                }]
+            }
 
 
-            var surveyJSON = {
+            var surveyVittima = {
                 locale: "it",
                 pages: [{
                     name: "anagrafica",
@@ -777,9 +1088,15 @@
                 showProgressBar: "top",
                 widthMode: "responsive"
             }
+            var survey;
 
+            if (vittima) {
+                survey = new Survey.Model(surveyVittima);
 
-            var survey = new Survey.Model(surveyJSON);
+            } else {
+                survey = new Survey.Model(surveyNonVittima);
+            }
+
             $("#surveyContainer").Survey({
                 model: survey,
                 onComplete: sendDataToServer
@@ -790,7 +1107,11 @@
             });
 
             function sendDataToServer(survey) {
-                survey.sendResult('773c5f45-4731-4359-8cbe-ef8e864cf970');
+                if (vittima) {
+                    survey.sendResult('773c5f45-4731-4359-8cbe-ef8e864cf970');
+                } else {
+                    survey.sendResult('2670133f-9221-4608-8f70-501a7f274a88');
+                }
             }
 
 
