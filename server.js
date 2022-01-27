@@ -27,7 +27,7 @@ app.get('/hibp', (req, res) => {
         accept: 'application/json',
         content_type: 'application/json',
         headers: {
-            'hibp-api-key': '06d8f69641eb43209225729887699b81',
+            'hibp-api-key': '6b070fcda5d644e6b38445e04184d0fb',
             'user-agent': 'myApp'
         }
     }
